@@ -1,0 +1,65 @@
+<div class="form-container">
+  <form [formGroup]="educationForm">
+    <div formArrayName="education">
+      <div *ngFor="let edu of education.controls; let i = index" [formGroupName]="i" class="education-item">
+        <div class="education-header">
+          <h3>Education {{ i + 1 }}</h3>
+          <button mat-icon-button type="button" (click)="removeEducation(i)" color="warn">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Degree</mat-label>
+            <input matInput formControlName="degree" placeholder="e.g., B.Tech in Information Technology">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Institution</mat-label>
+            <input matInput formControlName="institution" placeholder="e.g., Kamaraj College of Engineering and Technology">
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="third-width">
+            <mat-label>Location (Optional)</mat-label>
+            <input matInput formControlName="location" placeholder="City / Country">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="third-width">
+            <mat-label>Start Year</mat-label>
+            <input matInput type="number" formControlName="startYear" placeholder="2018" min="1950" max="2030">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="third-width">
+            <mat-label>End Year</mat-label>
+            <input matInput type="number" formControlName="endYear" placeholder="2022" min="1950" max="2030">
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>CGPA / Percentage (Optional)</mat-label>
+            <input matInput formControlName="cgpa" placeholder="e.g., CGPA: 8.2 or 85%">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <button mat-raised-button type="button" (click)="addEducation()" class="add-education-btn">
+      <mat-icon>add</mat-icon>
+      Add Education
+    </button>
+
+    <div class="example-section">
+      <h3>Example:</h3>
+      <div class="example-education">
+        <div class="example-header">
+          <strong>B.Tech in Information Technology – Kamaraj College of Engineering and Technology</strong>
+          <span class="example-location">📍 2018 – 2022 | CGPA: 8.2</span>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

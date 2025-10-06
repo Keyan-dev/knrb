@@ -1,0 +1,83 @@
+<div class="form-container">
+  <form [formGroup]="personalDetailsForm">
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Full Name</mat-label>
+        <input matInput formControlName="name" placeholder="Enter your full name">
+        <mat-error *ngIf="personalDetailsForm.get('name')?.invalid && personalDetailsForm.get('name')?.touched">
+          {{ getErrorMessage('name') }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Profession</mat-label>
+        <input matInput formControlName="profession" placeholder="e.g., Senior Full Stack Engineer">
+        <mat-error *ngIf="personalDetailsForm.get('profession')?.invalid && personalDetailsForm.get('profession')?.touched">
+          {{ getErrorMessage('profession') }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Mobile Number</mat-label>
+        <input matInput formControlName="mobileNumber" placeholder="+1 (555) 123-4567">
+        <mat-error *ngIf="personalDetailsForm.get('mobileNumber')?.invalid && personalDetailsForm.get('mobileNumber')?.touched">
+          {{ getErrorMessage('mobileNumber') }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="your.email@example.com">
+        <mat-error *ngIf="personalDetailsForm.get('email')?.invalid && personalDetailsForm.get('email')?.touched">
+          {{ getErrorMessage('email') }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>LinkedIn Profile</mat-label>
+        <input matInput formControlName="linkedinProfile" placeholder="https://linkedin.com/in/yourprofile">
+        <mat-error *ngIf="personalDetailsForm.get('linkedinProfile')?.invalid && personalDetailsForm.get('linkedinProfile')?.touched">
+          {{ getErrorMessage('linkedinProfile') }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Portfolio Website</mat-label>
+        <input matInput formControlName="portfolioSite" placeholder="https://yourportfolio.com">
+        <mat-error *ngIf="personalDetailsForm.get('portfolioSite')?.invalid && personalDetailsForm.get('portfolioSite')?.touched">
+          {{ getErrorMessage('portfolioSite') }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="additional-links-section">
+      <h3>Additional Links</h3>
+      <div formArrayName="additionalLinks">
+        <div *ngFor="let link of additionalLinks.controls; let i = index" class="link-row">
+          <mat-form-field appearance="outline" class="link-input">
+            <mat-label>Additional Link</mat-label>
+            <input matInput [formControl]="$any(additionalLinks.at(i))" placeholder="https://example.com">
+            <mat-error *ngIf="additionalLinks.at(i).invalid && additionalLinks.at(i).touched">
+              Please enter a valid URL
+            </mat-error>
+          </mat-form-field>
+          <button mat-icon-button type="button" (click)="removeAdditionalLink(i)" color="warn">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+      <button mat-stroked-button type="button" (click)="addAdditionalLink()" class="add-link-btn">
+        <mat-icon>add</mat-icon>
+        Add Link
+      </button>
+    </div>
+  </form>
+</div>

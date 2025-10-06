@@ -1,0 +1,64 @@
+<div class="form-container">
+  <form [formGroup]="certificationsForm">
+    <div formArrayName="certifications">
+      <div *ngFor="let certification of certifications.controls; let i = index" [formGroupName]="i" class="certification-item">
+        <div class="certification-header">
+          <h3>Certification {{ i + 1 }}</h3>
+          <button mat-icon-button type="button" (click)="removeCertification(i)" color="warn">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Certification Name</mat-label>
+            <input matInput formControlName="certificationName" placeholder="e.g., Angular (Intermediate)">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Issuing Organization</mat-label>
+            <input matInput formControlName="issuingOrganization" placeholder="e.g., HackerRank">
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Date Issued</mat-label>
+            <input matInput type="date" formControlName="dateIssued">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Description (Optional)</mat-label>
+            <input matInput formControlName="description" placeholder="Brief description if needed">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <button mat-raised-button type="button" (click)="addCertification()" class="add-certification-btn">
+      <mat-icon>add</mat-icon>
+      Add Certification
+    </button>
+
+    <div class="example-section">
+      <h3>Examples:</h3>
+      <div class="example-certifications">
+        <div class="example-certification">
+          <strong>Angular (Intermediate)</strong> – HackerRank, 2025
+        </div>
+        <div class="example-certification">
+          <strong>Node.js (Basic)</strong> – HackerRank, 2024
+        </div>
+        <div class="example-certification">
+          <strong>Vibe Coding Fundamentals</strong> – LinkedIn, 2025
+        </div>
+        <div class="example-certification">
+          <strong>Outstanding Developer</strong> – ZenBasket, 2024
+        </div>
+        <div class="example-certification">
+          <strong>Most Determined Employee</strong> – Centizen Inc., 2023
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,119 @@
+<div class="preview-container">
+  <div class="preview-header">
+    <div class="preview-actions">
+      <div class="template-info">
+        <span class="template-name">{{ currentTemplate?.name }} Template</span>
+        <button mat-icon-button (click)="changeTemplate()" class="change-template-btn" title="Change Template">
+          <mat-icon>palette</mat-icon>
+        </button>
+      </div>
+      <div class="export-buttons">
+        <button mat-stroked-button (click)="saveResumeWithName()">
+          <mat-icon>save</mat-icon>
+          Save Resume
+        </button>
+        <button mat-raised-button color="primary" (click)="exportToPDF()">
+          <mat-icon>picture_as_pdf</mat-icon>
+          Export PDF
+        </button>
+        <!-- <button mat-raised-button color="accent" (click)="exportToDOCX()">
+          <mat-icon>description</mat-icon>
+          Export DOCX
+        </button> -->
+      </div>
+    </div>
+  </div>
+
+  <div id="resume-preview" class="resume-preview" [ngClass]="'template-' + selectedTemplate" [ngStyle]="getTemplateStyles()" *ngIf="resumeData">
+    <!-- Header Section -->
+    <div class="resume-header">
+      <h1 class="name">{{ resumeData.personalDetails.name }}</h1>
+      <h2 class="profession">{{ resumeData.personalDetails.profession }}</h2>
+      
+      <div class="contact-info">
+        <div class="contact-item">
+          <strong>Email:</strong> {{ resumeData.personalDetails.email }}
+        </div>
+        <div class="contact-item">
+          <strong>Phone:</strong> {{ resumeData.personalDetails.mobileNumber }}
+        </div>
+        <div class="contact-item" *ngIf="resumeData.personalDetails.linkedinProfile">
+          <strong>LinkedIn:</strong> {{ resumeData.personalDetails.linkedinProfile }}
+        </div>
+        <div class="contact-item" *ngIf="resumeData.personalDetails.portfolioSite">
+          <strong>Portfolio:</strong> {{ resumeData.personalDetails.portfolioSite }}
+        </div>
+        <div class="contact-item" *ngFor="let link of resumeData.personalDetails.additionalLinks">
+          <strong>Link:</strong> {{ link }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Professional Summary -->
+    <div class="section" *ngIf="resumeData.professionalSummary.summary">
+      <h3 class="section-title">PROFESSIONAL SUMMARY</h3>
+      <p class="summary-text">{{ resumeData.professionalSummary.summary }}</p>
+    </div>
+
+    <!-- Skills -->
+    <div class="section" *ngIf="resumeData.skills.length > 0">
+      <h3 class="section-title">SKILLS</h3>
+      <div class="skills-container">
+        <div class="skill-category" *ngFor="let category of resumeData.skills">
+          <strong>{{ category.category }}:</strong> {{ category.skills.join(', ') }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Experience -->
+    <div class="section" *ngIf="resumeData.experience.length > 0">
+      <h3 class="section-title">EXPERIENCE</h3>
+      <div class="experience-container">
+        <div class="experience-item" *ngFor="let exp of resumeData.experience">
+          <div class="experience-header">
+            <h4 class="job-title">{{ exp.jobTitle }} | {{ exp.companyName }}</h4>
+            <div class="experience-meta">
+              <span *ngIf="exp.location">📍 {{ exp.location }} | </span>
+              <span>{{ formatExperienceDate(exp) }}</span>
+            </div>
+          </div>
+          <div class="experience-description">{{ exp.description }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div class="section" *ngIf="resumeData.education.length > 0">
+      <h3 class="section-title">EDUCATION</h3>
+      <div class="education-container">
+        <div class="education-item" *ngFor="let edu of resumeData.education">
+          <div class="education-header">
+            <h4 class="degree">{{ edu.degree }} – {{ edu.institution }}</h4>
+            <div class="education-meta">
+              <span *ngIf="edu.location">📍 {{ edu.location }} | </span>
+              <span>{{ edu.startYear }} – {{ edu.endYear }}</span>
+              <span *ngIf="edu.cgpa"> | {{ edu.cgpa }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Certifications -->
+    <div class="section" *ngIf="resumeData.certifications.length > 0">
+      <h3 class="section-title">CERTIFICATIONS & ACHIEVEMENTS</h3>
+      <div class="certifications-container">
+        <div class="certification-item" *ngFor="let cert of resumeData.certifications">
+          <strong>{{ cert.certificationName }}</strong> – {{ cert.issuingOrganization }}, {{ cert?.dateIssued?formatDate(cert.dateIssued):'' }}
+          <div *ngIf="cert.description" class="cert-description">{{ cert.description }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="!resumeData || (!resumeData.personalDetails.name && !resumeData.professionalSummary.summary)">
+    <mat-icon>description</mat-icon>
+    <h3>No Resume Data</h3>
+    <p>Please fill out the forms above to see your resume preview.</p>
+  </div>
+</div>

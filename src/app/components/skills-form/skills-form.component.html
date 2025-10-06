@@ -1,0 +1,59 @@
+<div class="form-container">
+  <form [formGroup]="skillsForm">
+    <div formArrayName="skillCategories">
+      <div *ngFor="let category of skillCategories.controls; let i = index" [formGroupName]="i" class="skill-category">
+        <div class="category-header">
+          <mat-form-field appearance="outline" class="category-input">
+            <mat-label>Skill Category</mat-label>
+            <input matInput formControlName="category" placeholder="e.g., Frontend, Backend, Databases">
+          </mat-form-field>
+          <button mat-icon-button type="button" (click)="removeSkillCategory(i)" color="warn" class="remove-category-btn">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+
+        <div formArrayName="skills" class="skills-container">
+          <div *ngFor="let skill of getSkills(i).controls; let j = index" class="skill-row">
+            <mat-form-field appearance="outline" class="skill-input">
+              <mat-label>Skill</mat-label>
+              <input matInput [formControl]="$any(getSkills(i).at(j))" placeholder="e.g., Angular, Node.js, Redis">
+            </mat-form-field>
+            <button mat-icon-button type="button" (click)="removeSkill(i, j)" color="warn">
+              <mat-icon>remove</mat-icon>
+            </button>
+          </div>
+          <button mat-stroked-button type="button" (click)="addSkill(i)" class="add-skill-btn">
+            <mat-icon>add</mat-icon>
+            Add Skill
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <button mat-raised-button type="button" (click)="addSkillCategory()" class="add-category-btn">
+      <mat-icon>add</mat-icon>
+      Add Skill Category
+    </button>
+
+    <div class="example-section">
+      <h3>Example:</h3>
+      <div class="example-skills">
+        <div class="example-category">
+          <strong>Frontend:</strong> Angular, React.js, Ionic, Material UI
+        </div>
+        <div class="example-category">
+          <strong>Backend:</strong> Node.js, Express.js, GraphQL, BullMQ
+        </div>
+        <div class="example-category">
+          <strong>Databases & Caching:</strong> MongoDB, PostgreSQL, MySQL, Redis
+        </div>
+        <div class="example-category">
+          <strong>Programming Languages:</strong> TypeScript, JavaScript, Java, C, SQL
+        </div>
+        <div class="example-category">
+          <strong>Tools & Others:</strong> NPM, Jest, Redux, Git, RESTful APIs, Agile/Scrum
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

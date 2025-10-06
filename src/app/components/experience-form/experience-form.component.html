@@ -1,0 +1,84 @@
+<div class="form-container">
+  <form [formGroup]="experienceForm">
+    <div formArrayName="experiences">
+      <div *ngFor="let experience of experiences.controls; let i = index" [formGroupName]="i" class="experience-item">
+        <div class="experience-header">
+          <h3>Experience {{ i + 1 }}</h3>
+          <button mat-icon-button type="button" (click)="removeExperience(i)" color="warn">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Job Title</mat-label>
+            <input matInput formControlName="jobTitle" placeholder="e.g., Senior Full Stack Developer">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Company Name</mat-label>
+            <input matInput formControlName="companyName" placeholder="e.g., TestData LTD">
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="third-width">
+            <mat-label>Location (Optional)</mat-label>
+            <input matInput formControlName="location" placeholder="e.g., Chennai">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="third-width">
+            <mat-label>Start Date</mat-label>
+            <input matInput type="date" formControlName="startDate">
+          </mat-form-field>
+
+          <div class="third-width end-date-container">
+            <mat-form-field appearance="outline" class="end-date-field">
+              <mat-label>End Date</mat-label>
+              <input matInput type="date" formControlName="endDate" [disabled]="experience.get('isPresent')?.value">
+            </mat-form-field>
+            <mat-checkbox formControlName="isPresent" (change)="onPresentCheckboxChange(i, $event.checked)">
+              Present
+            </mat-checkbox>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Description</mat-label>
+            <textarea 
+              matInput 
+              formControlName="description" 
+              placeholder="Describe your achievements and responsibilities..."
+              rows="4">
+            </textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <button mat-raised-button type="button" (click)="addExperience()" class="add-experience-btn">
+      <mat-icon>add</mat-icon>
+      Add Experience
+    </button>
+
+    <div class="example-section">
+      <h3>Example:</h3>
+      <div class="example-experience">
+        <div class="example-header">
+          <strong>Senior Full Stack Developer | TestData LTD</strong>
+          <span class="example-location">📍 Chennai | Jan 2024 – Present</span>
+        </div>
+        <ul class="example-description">
+          <li>Contributing to the design and development of scalable web and cross-platform applications.</li>
+          <li>Developing cross-platform mobile apps using Ionic integrated with Angular and Node.js.</li>
+          <li>Designed and implemented GraphQL APIs, reducing API over-fetching and improving load times by 35%.</li>
+          <li>Integrated Redis caching, improving performance with 50% faster response times.</li>
+          <li>Implemented microservices with Node.js, Express.js, and Docker ensuring scalability.</li>
+          <li>Collaborated with DevOps to improve CI/CD pipelines and real-time monitoring.</li>
+          <li>Mentored junior developers and enhanced team productivity.</li>
+        </ul>
+      </div>
+    </div>
+  </form>
+</div>

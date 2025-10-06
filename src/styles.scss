@@ -1,1 +1,123 @@
-/* You can add global styles to this file, and also import other style files */
+/* Angular Material Theme */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  background-color: #f5f5f5;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Form field improvements */
+.mat-mdc-form-field {
+  margin-bottom: 16px;
+}
+
+.mat-mdc-form-field .mat-mdc-text-field-wrapper {
+  background-color: white;
+}
+
+/* Button improvements */
+.mat-mdc-raised-button {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s;
+}
+
+.mat-mdc-raised-button:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Stepper improvements */
+.mat-mdc-stepper-horizontal {
+  background-color: transparent;
+}
+
+.mat-mdc-step-header {
+  padding: 8px 16px;
+}
+
+.mat-mdc-step-header .mat-step-icon {
+  background-color: #e0e0e0;
+  color: #666;
+}
+
+.mat-mdc-step-header.mat-step-header-selected .mat-step-icon {
+  background-color: #1976d2;
+  color: white;
+}
+
+.mat-mdc-step-header.mat-step-header-selected .mat-step-label {
+  color: #1976d2;
+  font-weight: 500;
+}
+
+/* Toolbar improvements */
+.mat-toolbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Icon improvements */
+.mat-icon {
+  vertical-align: middle;
+}
+
+/* Focus improvements */
+.mat-mdc-form-field .mat-mdc-form-field-focus-overlay {
+  background-color: rgba(25, 118, 210, 0.04);
+}
+
+/* Animation improvements */
+.mat-mdc-button, .mat-mdc-raised-button, .mat-mdc-outlined-button {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Print styles */
+@media print {
+  .app-toolbar,
+  .navigation-container,
+  .export-buttons,
+  .preview-header {
+    display: none !important;
+  }
+  
+  .main-content {
+    background-color: white !important;
+  }
+  
+  .resume-preview {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+}

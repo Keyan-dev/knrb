@@ -1,0 +1,25 @@
+<div class="form-container">
+  <form [formGroup]="summaryForm">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Professional Summary</mat-label>
+      <textarea 
+        matInput 
+        formControlName="summary" 
+        placeholder="Write a compelling professional summary that highlights your experience, expertise, and key achievements..."
+        rows="6"
+        maxlength="500">
+      </textarea>
+      <mat-hint align="end">{{ summaryForm.get('summary')?.value?.length || 0 }}/500</mat-hint>
+      <mat-error *ngIf="summaryForm.get('summary')?.invalid && summaryForm.get('summary')?.touched">
+        {{ getErrorMessage() }}
+      </mat-error>
+    </mat-form-field>
+    
+    <div class="example-section">
+      <h3>Example:</h3>
+      <p class="example-text">
+        Senior Full Stack Engineer with 3+ years of experience building scalable, high-performance, and cross-platform applications. Proficient in Angular, React.js, Node.js, and Ionic with expertise in microservices architecture, RESTful and GraphQL API design, and front-end optimization. Skilled in driving projects end-to-end, improving application performance, mentoring teams, and delivering clean, maintainable, and user-focused solutions in agile environments.
+      </p>
+    </div>
+  </form>
+</div>
